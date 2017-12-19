@@ -21,14 +21,18 @@ protocol SearchInteractorInput {
 class SearchInteractor: SearchInteractorInput {
     
     weak var output: SearchInteractorOutput?
-    let storageManager: Storage
+    private let storageManager: Storage
 
     init(storageManager: Storage = UserDefaultsStorageImplementation()) {
         self.storageManager = storageManager
     }
 
     func insertRecentSearch(searchString: String) {
-        //storageManager.addSuccessfulRecentSearch(...)
+        storageManager.addSuccessfulRecentSearch(recentSearch: searchString) { (needsUpdate: Bool) in
+            if (needsUpdate) {
+                output?.updateWithRecentSearches(recentSearches: storageManager.fetchRecentSearches())
+            }
+        }
     }
     
     func fetchRecentSearches() {

@@ -16,11 +16,11 @@ protocol SearchViewOutput {
     
     func userActivatedTextField()
     func userTappedOnSearchButton(withSearchText searchText: String)
-    func userDeactivatedTextField() //resignfirstResponder
+    func userDeactivatedTextField()
     
     func needsUpdateRecentSearch()
     func recentSearchCount() -> Int
-    func cellViewModelForRow(atIndexPath indexPath: IndexPath) // returns some RecentSearchCellDataModel
+    func cellViewModelForRow(atIndexPath indexPath: IndexPath) -> RecentSearchCellDataModel
     func user(didSelectRecentSearchAt indexPath: IndexPath)
 }
 
@@ -28,7 +28,6 @@ protocol SearchInteractorOutput: class {
     func updateWithRecentSearches(recentSearches: [String])
     func recentSearchNotAvailable()
 }
-
 
 class SearchPresenter {
     
@@ -50,7 +49,6 @@ extension SearchPresenter: SearchViewOutput {
     }
     
     func viewWillAppear() {
-        showRecentSearchTableIfNeeded()
     }
     
     func viewDidAppear() {
@@ -60,11 +58,9 @@ extension SearchPresenter: SearchViewOutput {
     }
     
     func userActivatedTextField() {
-        showRecentSearchTableIfNeeded()
-    }
-    
-    private func showRecentSearchTableIfNeeded() {
-        view?.showRecentSearchTable()
+        if recentSearchCount() > 0 {
+            view?.showRecentSearchTable()
+        }
     }
     
     func userDeactivatedTextField() {
@@ -80,11 +76,16 @@ extension SearchPresenter: SearchViewOutput {
     }
     
     func user(didSelectRecentSearchAt indexPath: IndexPath) {
-
+        let selectedSearch = recentSearches[indexPath.row]
+        view?.updateTextFieldWithRecentSearch(searchString: selectedSearch.searchText)
+        
     }
     
     func userTappedOnSearchButton(withSearchText searchText: String) {
-
+        if isValidSearchText(searchText: searchText) {
+            self.searchText = searchText
+            coordinator.presentMovieCoordinator(forSearchText: searchText)
+        }
     }
     
     func needsUpdateRecentSearch() {
@@ -92,15 +93,15 @@ extension SearchPresenter: SearchViewOutput {
     }
     
     private func isValidSearchText(searchText: String) -> Bool {
-        //TODO:
-        return true
+        return !searchText.isEmpty
     }
 }
 
 extension SearchPresenter: SearchInteractorOutput {
     
     func updateWithRecentSearches(recentSearches: [String]) {
-        //refresh list
+        self.recentSearches = recentSearches.map {RecentSearchCellDataModel(searchText: $0)}
+        
         view?.refreshRecentSearchData()
     }
     

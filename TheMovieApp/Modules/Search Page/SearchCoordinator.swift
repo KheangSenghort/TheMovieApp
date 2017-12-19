@@ -49,8 +49,10 @@ extension SearchCoordinator: SearchCoordinatorInput {
                 return
             }
             
-            //read status for movie list coordinator, and update recent search table and storage if needed.
-            
+            //TODO: read status for movie list coordinator, and update recent search table and storage if needed.
+            //or, show error on this page, as required.
+            weakSelf.homeViewController.output.needsUpdateRecentSearch()
+
             weakSelf.removeChild(weakMovieCoordinator)
         }
     }

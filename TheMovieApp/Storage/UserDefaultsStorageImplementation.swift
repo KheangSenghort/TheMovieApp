@@ -13,16 +13,39 @@ import Foundation
  */
 
 class UserDefaultsStorageImplementation : Storage {
-    
+    private let recentSearchesKey = "recentSearchesKey"
+
     func resetStorage() {
-        
+        let userDefaults = UserDefaults.standard
+        userDefaults.set(nil, forKey: recentSearchesKey)
+        userDefaults.synchronize()
     }
     
     func fetchRecentSearches() -> [String] {
-        return ["", ""]
+        return UserDefaults.standard.value(forKey: recentSearchesKey) as? [String] ?? [String]()
     }
     
     func addSuccessfulRecentSearch(recentSearch: String, completion: (Bool) -> Void) {
-        completion(false)
+        var recentSearches: [String] = fetchRecentSearches()
+        
+        let index: Int? = recentSearches.index { (searchItem: String) -> Bool in
+            return searchItem.lowercased() == recentSearch.lowercased()
+        }
+        
+        if let currentIndex = index {
+            if currentIndex == 0 {
+                completion(false)
+                return
+            }
+            recentSearches.remove(at: currentIndex)
+        }
+        //TODO: Keep only 10 items in 'recentSearches'
+        recentSearches.insert(recentSearch, at: 0)
+        
+        let userDefaults = UserDefaults.standard
+        userDefaults.set(recentSearches, forKey: recentSearchesKey)
+        userDefaults.synchronize()
+        
+        completion(true)
     }
 }

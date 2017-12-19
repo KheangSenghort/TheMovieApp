@@ -12,6 +12,7 @@ protocol SearchViewInput: class {
     func showRecentSearchTable()
     func hideRecentSearchTable()
     func refreshRecentSearchData()
+    func showErrorAlert(withTitle title: String, message: String)
     func updateTextFieldWithRecentSearch(searchString: String)
 }
 
@@ -83,6 +84,7 @@ class SearchViewController: UIViewController {
     }
     
     @objc func didTapSearchButton(_ sender: UIButton) {
+        self.textField.endEditing(true)
         output.userTappedOnSearchButton(withSearchText: textField.text ?? "")
     }
     
@@ -107,13 +109,13 @@ extension SearchViewController : UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         output.user(didSelectRecentSearchAt: indexPath)
     }
-    
 }
 
 extension SearchViewController: UITextFieldDelegate {
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
         output.userActivatedTextField()
+        //TODO: check keyboard notification and resize recentSearchTable accordingly.
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
@@ -122,6 +124,12 @@ extension SearchViewController: UITextFieldDelegate {
 }
 
 extension SearchViewController : SearchViewInput {
+    func showErrorAlert(withTitle title: String, message: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let alertButton = UIAlertAction(title: "Okay 😕", style: .cancel, handler: nil)
+        alert.addAction(alertButton)
+        self.present(alert, animated: true, completion: nil)
+    }
     
     func showRecentSearchTable() {
         recentSearchTable.isHidden = false
@@ -139,4 +147,3 @@ extension SearchViewController : SearchViewInput {
         textField.text = searchString
     }
 }
-
