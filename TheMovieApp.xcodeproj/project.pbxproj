@@ -23,6 +23,10 @@
 		E18C99901FE90A35008F5A4F /* UserDefaultsStorageImplementation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E18C998F1FE90A35008F5A4F /* UserDefaultsStorageImplementation.swift */; };
 		E18C99921FE90A6C008F5A4F /* MovieListService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E18C99911FE90A6C008F5A4F /* MovieListService.swift */; };
 		E18C99941FE90A7E008F5A4F /* MovieListServiceImplementation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E18C99931FE90A7E008F5A4F /* MovieListServiceImplementation.swift */; };
+		E18C99981FE9158E008F5A4F /* SearchCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E18C99971FE9158E008F5A4F /* SearchCoordinator.swift */; };
+		E18C999A1FE9159D008F5A4F /* SearchInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = E18C99991FE9159D008F5A4F /* SearchInteractor.swift */; };
+		E18C999C1FE915AA008F5A4F /* SearchPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E18C999B1FE915AA008F5A4F /* SearchPresenter.swift */; };
+		E18C999E1FE915BB008F5A4F /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E18C999D1FE915BB008F5A4F /* SearchViewController.swift */; };
 		F44CC283C076A839AB395ADA /* Pods_TheMovieAppTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 782E2FB13A1BD67D4E98D5A7 /* Pods_TheMovieAppTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -61,6 +65,10 @@
 		E18C998F1FE90A35008F5A4F /* UserDefaultsStorageImplementation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsStorageImplementation.swift; sourceTree = "<group>"; };
 		E18C99911FE90A6C008F5A4F /* MovieListService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieListService.swift; sourceTree = "<group>"; };
 		E18C99931FE90A7E008F5A4F /* MovieListServiceImplementation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieListServiceImplementation.swift; sourceTree = "<group>"; };
+		E18C99971FE9158E008F5A4F /* SearchCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCoordinator.swift; sourceTree = "<group>"; };
+		E18C99991FE9159D008F5A4F /* SearchInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchInteractor.swift; sourceTree = "<group>"; };
+		E18C999B1FE915AA008F5A4F /* SearchPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchPresenter.swift; sourceTree = "<group>"; };
+		E18C999D1FE915BB008F5A4F /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		F3CEC4E1B647223BDC27DE47 /* Pods-TheMovieApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TheMovieApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-TheMovieApp/Pods-TheMovieApp.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -162,6 +170,8 @@
 		E18C99801FE906CE008F5A4F /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				E18C99951FE914CA008F5A4F /* Search Page */,
+				E18C99961FE914E6008F5A4F /* Movies List Page */,
 			);
 			path = Modules;
 			sourceTree = "<group>";
@@ -182,6 +192,24 @@
 				E18C998F1FE90A35008F5A4F /* UserDefaultsStorageImplementation.swift */,
 			);
 			path = Storage;
+			sourceTree = "<group>";
+		};
+		E18C99951FE914CA008F5A4F /* Search Page */ = {
+			isa = PBXGroup;
+			children = (
+				E18C99971FE9158E008F5A4F /* SearchCoordinator.swift */,
+				E18C99991FE9159D008F5A4F /* SearchInteractor.swift */,
+				E18C999B1FE915AA008F5A4F /* SearchPresenter.swift */,
+				E18C999D1FE915BB008F5A4F /* SearchViewController.swift */,
+			);
+			path = "Search Page";
+			sourceTree = "<group>";
+		};
+		E18C99961FE914E6008F5A4F /* Movies List Page */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "Movies List Page";
 			sourceTree = "<group>";
 		};
 		EE92D844A58350DF6328067C /* Pods */ = {
@@ -408,10 +436,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E18C999E1FE915BB008F5A4F /* SearchViewController.swift in Sources */,
 				E18C998C1FE909AF008F5A4F /* CoordinatorType.swift in Sources */,
 				E18C99861FE907FD008F5A4F /* Router.swift in Sources */,
 				E18C99921FE90A6C008F5A4F /* MovieListService.swift in Sources */,
+				E18C999A1FE9159D008F5A4F /* SearchInteractor.swift in Sources */,
 				E16D68BE1FE8FAA1009178F9 /* ViewController.swift in Sources */,
+				E18C99981FE9158E008F5A4F /* SearchCoordinator.swift in Sources */,
+				E18C999C1FE915AA008F5A4F /* SearchPresenter.swift in Sources */,
 				E18C99941FE90A7E008F5A4F /* MovieListServiceImplementation.swift in Sources */,
 				E18C998A1FE90891008F5A4F /* Coordinator.swift in Sources */,
 				E18C99901FE90A35008F5A4F /* UserDefaultsStorageImplementation.swift in Sources */,
