@@ -22,7 +22,7 @@ class MoviesCoordinator: Coordinator   {
         let presenter = MoviesPresenter()
         presenter.view = controller
         presenter.coordinator = self
-        let interactor = MoviesInteractor()
+        let interactor = MoviesInteractor(searchText: "Batman")//TODO: pass query string.
         interactor.output = presenter
         presenter.interactor = interactor
         

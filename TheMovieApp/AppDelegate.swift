@@ -13,6 +13,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
+    private lazy var config: ConfigType = Config(bundle: .main, locale: .current)
     private lazy var appNavigationController: UINavigationController = UINavigationController()
     private lazy var appRouter: RouterType = Router(navigationController: self.appNavigationController)
     private lazy var rootCoordinator: SearchCoordinator = SearchCoordinator(router: self.appRouter)

@@ -20,5 +20,14 @@ protocol MovieListInteractorInput {
 class MoviesInteractor : MovieListInteractorInput {
     
     weak var output: MovieListInteractorOutput?
+    let movieListService: MovieListService
+    var movies = [MovieListDataModel.Movies]()
+    let searchText: String
+
+    init(searchText: String, movieListService: MovieListService = MovieListServiceBuilder().build()) {
+        self.searchText = searchText
+        self.movieListService = movieListService
+    }
+
 
 }
