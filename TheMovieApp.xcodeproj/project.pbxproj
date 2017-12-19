@@ -27,6 +27,10 @@
 		E18C999A1FE9159D008F5A4F /* SearchInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = E18C99991FE9159D008F5A4F /* SearchInteractor.swift */; };
 		E18C999C1FE915AA008F5A4F /* SearchPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E18C999B1FE915AA008F5A4F /* SearchPresenter.swift */; };
 		E18C999E1FE915BB008F5A4F /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E18C999D1FE915BB008F5A4F /* SearchViewController.swift */; };
+		E18C99A01FE92B43008F5A4F /* MovieListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E18C999F1FE92B43008F5A4F /* MovieListViewController.swift */; };
+		E18C99A21FE92B52008F5A4F /* MovieListCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E18C99A11FE92B52008F5A4F /* MovieListCoordinator.swift */; };
+		E18C99A41FE92B61008F5A4F /* MovieListInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = E18C99A31FE92B61008F5A4F /* MovieListInteractor.swift */; };
+		E18C99A61FE92B71008F5A4F /* MovieListPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E18C99A51FE92B71008F5A4F /* MovieListPresenter.swift */; };
 		F44CC283C076A839AB395ADA /* Pods_TheMovieAppTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 782E2FB13A1BD67D4E98D5A7 /* Pods_TheMovieAppTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -69,6 +73,10 @@
 		E18C99991FE9159D008F5A4F /* SearchInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchInteractor.swift; sourceTree = "<group>"; };
 		E18C999B1FE915AA008F5A4F /* SearchPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchPresenter.swift; sourceTree = "<group>"; };
 		E18C999D1FE915BB008F5A4F /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
+		E18C999F1FE92B43008F5A4F /* MovieListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieListViewController.swift; sourceTree = "<group>"; };
+		E18C99A11FE92B52008F5A4F /* MovieListCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieListCoordinator.swift; sourceTree = "<group>"; };
+		E18C99A31FE92B61008F5A4F /* MovieListInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieListInteractor.swift; sourceTree = "<group>"; };
+		E18C99A51FE92B71008F5A4F /* MovieListPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieListPresenter.swift; sourceTree = "<group>"; };
 		F3CEC4E1B647223BDC27DE47 /* Pods-TheMovieApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TheMovieApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-TheMovieApp/Pods-TheMovieApp.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -208,6 +216,10 @@
 		E18C99961FE914E6008F5A4F /* Movies List Page */ = {
 			isa = PBXGroup;
 			children = (
+				E18C999F1FE92B43008F5A4F /* MovieListViewController.swift */,
+				E18C99A11FE92B52008F5A4F /* MovieListCoordinator.swift */,
+				E18C99A31FE92B61008F5A4F /* MovieListInteractor.swift */,
+				E18C99A51FE92B71008F5A4F /* MovieListPresenter.swift */,
 			);
 			path = "Movies List Page";
 			sourceTree = "<group>";
@@ -437,10 +449,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				E18C999E1FE915BB008F5A4F /* SearchViewController.swift in Sources */,
+				E18C99A41FE92B61008F5A4F /* MovieListInteractor.swift in Sources */,
 				E18C998C1FE909AF008F5A4F /* CoordinatorType.swift in Sources */,
 				E18C99861FE907FD008F5A4F /* Router.swift in Sources */,
+				E18C99A01FE92B43008F5A4F /* MovieListViewController.swift in Sources */,
 				E18C99921FE90A6C008F5A4F /* MovieListService.swift in Sources */,
+				E18C99A61FE92B71008F5A4F /* MovieListPresenter.swift in Sources */,
 				E18C999A1FE9159D008F5A4F /* SearchInteractor.swift in Sources */,
+				E18C99A21FE92B52008F5A4F /* MovieListCoordinator.swift in Sources */,
 				E16D68BE1FE8FAA1009178F9 /* ViewController.swift in Sources */,
 				E18C99981FE9158E008F5A4F /* SearchCoordinator.swift in Sources */,
 				E18C999C1FE915AA008F5A4F /* SearchPresenter.swift in Sources */,

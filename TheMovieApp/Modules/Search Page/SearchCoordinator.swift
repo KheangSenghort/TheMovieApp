@@ -38,6 +38,20 @@ class SearchCoordinator: Coordinator {
 
 extension SearchCoordinator: SearchCoordinatorInput {
     func presentMovieCoordinator(forSearchText searchText: String) {
-        //TODO: 
+        let coordinator = MoviesCoordinator(router: router)//pass the string from here.
+        
+        // Maintain a strong reference to avoid deallocation
+        addChild(coordinator)
+        
+        // Avoid retain cycles and don't forget to remove the child when popped
+        router.push(coordinator, animated: true) { [weak self, weak coordinator] in
+            guard let weakSelf = self, let weakMovieCoordinator = coordinator else {
+                return
+            }
+            
+            //read status for movie list coordinator, and update recent search table and storage if needed.
+            
+            weakSelf.removeChild(weakMovieCoordinator)
+        }
     }
 }
