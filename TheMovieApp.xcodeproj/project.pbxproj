@@ -11,6 +11,7 @@
 		E1224C1F1FE983340003AFEA /* MovieListServiceBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1224C1E1FE983340003AFEA /* MovieListServiceBuilder.swift */; };
 		E1224C221FEA17310003AFEA /* MovieCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1224C201FEA17310003AFEA /* MovieCell.swift */; };
 		E1224C231FEA17310003AFEA /* MovieCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E1224C211FEA17310003AFEA /* MovieCell.xib */; };
+		E1224C261FEA547B0003AFEA /* MovieCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1224C251FEA547B0003AFEA /* MovieCellViewModel.swift */; };
 		E16D68BC1FE8FAA1009178F9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E16D68BB1FE8FAA1009178F9 /* AppDelegate.swift */; };
 		E16D68BE1FE8FAA1009178F9 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E16D68BD1FE8FAA1009178F9 /* ViewController.swift */; };
 		E16D68C11FE8FAA1009178F9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E16D68BF1FE8FAA1009178F9 /* Main.storyboard */; };
@@ -60,6 +61,7 @@
 		E1224C1E1FE983340003AFEA /* MovieListServiceBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieListServiceBuilder.swift; sourceTree = "<group>"; };
 		E1224C201FEA17310003AFEA /* MovieCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieCell.swift; sourceTree = "<group>"; };
 		E1224C211FEA17310003AFEA /* MovieCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MovieCell.xib; sourceTree = "<group>"; };
+		E1224C251FEA547B0003AFEA /* MovieCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieCellViewModel.swift; sourceTree = "<group>"; };
 		E16D68B81FE8FAA1009178F9 /* TheMovieApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TheMovieApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E16D68BB1FE8FAA1009178F9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E16D68BD1FE8FAA1009178F9 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -121,6 +123,16 @@
 				782E2FB13A1BD67D4E98D5A7 /* Pods_TheMovieAppTests.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		E1224C241FEA543E0003AFEA /* Movie Cell */ = {
+			isa = PBXGroup;
+			children = (
+				E1224C201FEA17310003AFEA /* MovieCell.swift */,
+				E1224C211FEA17310003AFEA /* MovieCell.xib */,
+				E1224C251FEA547B0003AFEA /* MovieCellViewModel.swift */,
+			);
+			path = "Movie Cell";
 			sourceTree = "<group>";
 		};
 		E16D68AF1FE8FAA1009178F9 = {
@@ -230,8 +242,7 @@
 		E18C99961FE914E6008F5A4F /* Movies List Page */ = {
 			isa = PBXGroup;
 			children = (
-				E1224C201FEA17310003AFEA /* MovieCell.swift */,
-				E1224C211FEA17310003AFEA /* MovieCell.xib */,
+				E1224C241FEA543E0003AFEA /* Movie Cell */,
 				E18C999F1FE92B43008F5A4F /* MovieListViewController.swift */,
 				E18C99A11FE92B52008F5A4F /* MovieListCoordinator.swift */,
 				E18C99A31FE92B61008F5A4F /* MovieListInteractor.swift */,
@@ -491,6 +502,7 @@
 				E18C998C1FE909AF008F5A4F /* CoordinatorType.swift in Sources */,
 				E18C99861FE907FD008F5A4F /* Router.swift in Sources */,
 				E1224C1F1FE983340003AFEA /* MovieListServiceBuilder.swift in Sources */,
+				E1224C261FEA547B0003AFEA /* MovieCellViewModel.swift in Sources */,
 				E18C99A01FE92B43008F5A4F /* MovieListViewController.swift in Sources */,
 				E18C99921FE90A6C008F5A4F /* MovieListService.swift in Sources */,
 				E1F890371FE9760A00184EA1 /* Configuration.swift in Sources */,
@@ -667,6 +679,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 825T66E5ZF;
 				INFOPLIST_FILE = TheMovieApp/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Mehul.TheMovieApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -683,6 +696,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 825T66E5ZF;
 				INFOPLIST_FILE = TheMovieApp/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Mehul.TheMovieApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";

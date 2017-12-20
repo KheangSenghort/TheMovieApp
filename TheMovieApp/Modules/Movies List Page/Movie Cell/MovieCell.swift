@@ -9,14 +9,6 @@
 import UIKit
 import AlamofireImage
 
-public struct MovieListCellViewModel {
-    let title: String
-    let releaseDate: String?
-    let overview: String?
-    let posterUrl: URL?
-    var movieImage: UIImage? = nil
-}
-
 protocol ConfigurableCell {
     func configure(withModel model: Any)
 }
@@ -38,7 +30,7 @@ class MovieCell: UITableViewCell, ConfigurableCell {
     
     func configure(withModel model: Any) {
         guard let movieCellViewModel = model as? MovieListCellViewModel else {
-            fatalError("Expected to have MovieListCellDataModel")
+            fatalError("Expected to have MovieListCellViewModel")
         }
 
         self.titleLabel.text = movieCellViewModel.title

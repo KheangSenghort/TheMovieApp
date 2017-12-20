@@ -27,6 +27,7 @@
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Movie Title" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eaL-Ry-gDN">
                         <rect key="frame" x="116" y="6" width="251" height="21"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="21" id="dcN-Rw-wUh"/>
                         </constraints>
@@ -36,17 +37,20 @@
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Release Date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Sp8-RT-yZc">
                         <rect key="frame" x="116" y="35" width="251" height="16"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Overview" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="spJ-4s-q9b">
                         <rect key="frame" x="116" y="59" width="251" height="16"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
+                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                 <constraints>
                     <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="spJ-4s-q9b" secondAttribute="bottom" constant="8" id="1zd-YO-q7g"/>
                     <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="mnw-9a-ioB" secondAttribute="bottom" priority="999" constant="8" id="2Rl-jn-huc"/>
@@ -64,6 +68,7 @@
                     <constraint firstItem="spJ-4s-q9b" firstAttribute="leading" secondItem="mnw-9a-ioB" secondAttribute="trailing" constant="8" id="yv9-xe-VCJ"/>
                 </constraints>
             </tableViewCellContentView>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <connections>
                 <outlet property="overviewLabel" destination="spJ-4s-q9b" id="hiJ-3E-VT9"/>
                 <outlet property="posterImage" destination="mnw-9a-ioB" id="T9S-jG-zCk"/>
@@ -74,6 +79,6 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="movie_placeholder" width="24" height="24"/>
+        <image name="movie_placeholder" width="48" height="48"/>
     </resources>
 </document>
