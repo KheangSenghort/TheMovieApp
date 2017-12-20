@@ -34,7 +34,6 @@ class MovieListViewController: UIViewController {
         
         tableView.dataSource = self
         tableView.delegate = self
-        tableView.prefetchDataSource = self
         tableView.allowsSelection = false
         
         setupConstraints()
@@ -99,15 +98,13 @@ extension MovieListViewController : UITableViewDelegate, UITableViewDataSource {
                 return UITableViewCell()
         }
         
+        defer {
+            if indexPath.row == output.numberOfCells() - 1 {
+                output.fetchNextCellsIfAvailable()
+            }
+        }
         let cellViewModel = output.cellViewModelForRow(atIndexPath: indexPath)
         cell.configure(withModel: cellViewModel)
         return cell
-    }
-}
-
-extension MovieListViewController: UITableViewDataSourcePrefetching {
-    func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
-        print("prefetching \(indexPaths.first!.row) to \(indexPaths.last!.row)")
-        output.fetchNextCellsIfAvailable()
     }
 }
