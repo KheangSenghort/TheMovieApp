@@ -36,7 +36,7 @@ class MoviesInteractor : MovieListInteractorInput {
         self.movieListService = movieListService
     }
 
-    func fetchFirstPageList() {//TODO: rename
+    func fetchFirstPageList() {
         let request = MovieListRequest(queryText: searchText, pageNumber: 1)
         fetchMoviesForRequest(request: request)
     }

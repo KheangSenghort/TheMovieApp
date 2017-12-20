@@ -30,7 +30,7 @@ class MoviesPresenter {
     weak var view: MovieListViewInput?
     var interactor: MovieListInteractorInput!
     var coordinator: MovieListCoordinatorInput!
-    var moviesListStatus: MovieListStatus = .fetching
+    var moviesListStatus: MovieListStatus = .awaitingResponse
     
     private var recentSearches = [MovieListCellViewModel]()
     
@@ -50,7 +50,7 @@ extension MoviesPresenter: MovieListViewOutput {
     }
     
     func viewWillDisappear() {
-        
+        coordinator.setMoviesListAvailabilityStatus(status: moviesListStatus)
     }
 
     func cellViewModelForRow(atIndexPath indexPath: IndexPath) -> MovieListCellViewModel {
@@ -85,7 +85,7 @@ extension MoviesPresenter: MovieListInteractorOutput {
     }
     
     func showError() {
-        moviesListStatus = .notAvailable
+        moviesListStatus = .error
         view?.dismiss()
     }
     
@@ -94,7 +94,7 @@ extension MoviesPresenter: MovieListInteractorOutput {
             moviesListStatus = .available
             view?.reloadTable()
         } else {
-            moviesListStatus = .notAvailable
+            moviesListStatus = .error
             view?.dismiss()
         }
     }

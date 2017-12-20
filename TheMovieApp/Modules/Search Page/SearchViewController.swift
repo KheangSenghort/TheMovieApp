@@ -16,6 +16,10 @@ protocol SearchViewInput: class {
     func updateTextFieldWithRecentSearch(searchString: String)
 }
 
+/**
+    Displays the search page containing search textfield, search button, and recent search table.
+    Relays user input back to the Presenter.
+ */
 class SearchViewController: UIViewController {
     
     let searchButton = UIButton()
@@ -56,12 +60,10 @@ class SearchViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        title = "Search"
-        searchButton.setTitle("🔍", for: .normal)//TODO: no hardcoding
-        searchButton.titleLabel?.font = UIFont.systemFont(ofSize: 30)//TODO: same as above
+        title = output.getTitleForSearchPage()
+        searchButton.setTitle(output.getTitleForSearchButton(), for: .normal)
+        searchButton.titleLabel?.font = UIFont.systemFont(ofSize: 30)
         textField.placeholder = " Enter movie to search"
-        
-        output.viewWillAppear()
     }
     
     private func setupConstraints () {

@@ -13,9 +13,9 @@ protocol MovieListCoordinatorInput: class {
 }
 
 enum MovieListStatus {
-    case fetching //TODO: maybe rename awaitingResponse
+    case awaitingResponse
     case available
-    case notAvailable //TODO: maybe rename to error (Error) 
+    case error
 }
 
 /**
@@ -42,7 +42,7 @@ class MoviesCoordinator: Coordinator   {
     
     init(withSearchString searchString: String, router: RouterType) {
         self.searchString = searchString
-        self.movieListStatus = .fetching
+        self.movieListStatus = .awaitingResponse
         super.init(router: router)
     }
     

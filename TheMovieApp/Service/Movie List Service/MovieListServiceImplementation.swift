@@ -32,22 +32,13 @@ class MovieListServiceImplementation: MovieListService {
             return
         }
         
-        //TODO: how to test? maybe a mock class with same name, and check for method call...
         Alamofire.request(requestURLString).responseJSON { response in
-            //print("Request: \(String(describing: response.request))")   // original url request
-            //print("Response: \(String(describing: response.response))") // http url response
-            //print("Result: \(response.result)")                         // response serialization result
-            
-            if let json = response.result.value {
-                print("JSON: \(json)") // serialized json response
-            }
             
             let decoder = JSONDecoder()
             do {
                 let listViewModel = try decoder.decode(MovieListDataModel.self, from: response.data!)
                 completion(MovieListResponse(status: .success(listViewModel: listViewModel)))
             } catch {
-                print(error)//
                 completion(MovieListResponse(status: .failure(error: error)))
             }
         }
@@ -58,7 +49,6 @@ class MovieListServiceImplementation: MovieListService {
         
         if let encodedQueryText = encodedQueryText {
             let movieSearchURL = "\(baseURLString + APIEndpoint)?api_key=\(APIKey)&query=\(encodedQueryText)&page=\(request.pageNumber)"
-            print(movieSearchURL) //TODO: remove all print
             return movieSearchURL
         }
         return nil

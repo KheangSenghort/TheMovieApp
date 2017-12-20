@@ -10,9 +10,8 @@ import Foundation
 
 protocol SearchViewOutput {
     func viewIsReady()
-    func viewWillAppear()
-    func viewDidAppear()
-    func viewWillDisappear()
+    func getTitleForSearchPage() -> String
+    func getTitleForSearchButton() -> String
     
     func userActivatedTextField()
     func userTappedOnSearchButton(withSearchText searchText: String)
@@ -29,6 +28,11 @@ protocol SearchInteractorOutput: class {
     func recentSearchNotAvailable()
 }
 
+/**
+    Contains view logic for preparing content for display, and react to user inputs.
+    Requests data from the interactor when needed.
+ */
+
 class SearchPresenter {
     
     weak var view: SearchViewInput?
@@ -41,20 +45,9 @@ class SearchPresenter {
 
 extension SearchPresenter: SearchViewOutput {
     
-    //MARK: SearchViewOutput
-    
     func viewIsReady() {
         view?.hideRecentSearchTable()
         interactor.fetchRecentSearches()
-    }
-    
-    func viewWillAppear() {
-    }
-    
-    func viewDidAppear() {
-    }
-    
-    func viewWillDisappear() {
     }
     
     func userActivatedTextField() {
@@ -78,7 +71,6 @@ extension SearchPresenter: SearchViewOutput {
     func user(didSelectRecentSearchAt indexPath: IndexPath) {
         let selectedSearch = recentSearches[indexPath.row]
         view?.updateTextFieldWithRecentSearch(searchString: selectedSearch.searchText)
-        
     }
     
     func userTappedOnSearchButton(withSearchText searchText: String) {
@@ -92,6 +84,14 @@ extension SearchPresenter: SearchViewOutput {
         interactor.insertRecentSearch(searchString: searchText)
     }
     
+    func getTitleForSearchPage() -> String {
+        return "Search"
+    }
+    
+    func getTitleForSearchButton() -> String {
+        return "🔍"
+    }
+    
     private func isValidSearchText(searchText: String) -> Bool {
         return !searchText.isEmpty
     }
@@ -101,7 +101,6 @@ extension SearchPresenter: SearchInteractorOutput {
     
     func updateWithRecentSearches(recentSearches: [String]) {
         self.recentSearches = recentSearches.map {RecentSearchCellDataModel(searchText: $0)}
-        
         view?.refreshRecentSearchData()
     }
     
@@ -113,4 +112,3 @@ extension SearchPresenter: SearchInteractorOutput {
 struct RecentSearchCellDataModel {
     let searchText: String
 }
-

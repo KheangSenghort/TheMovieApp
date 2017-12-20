@@ -37,22 +37,28 @@ class SearchCoordinator: Coordinator {
 }
 
 extension SearchCoordinator: SearchCoordinatorInput {
+    
     func presentMovieCoordinator(forSearchText searchText: String) {
+        
         let coordinator = MoviesCoordinator(withSearchString: searchText, router: router)
         
         // Maintain a strong reference to avoid deallocation
         addChild(coordinator)
         
-        // Avoid retain cycles and don't forget to remove the child when popped
         router.push(coordinator, animated: true) { [weak self, weak coordinator] in
             guard let weakSelf = self, let weakMovieCoordinator = coordinator else {
                 return
             }
             
-            //TODO: read status for movie list coordinator, and update recent search table and storage if needed.
-            //or, show error on this page, as required.
-            weakSelf.homeViewController.output.needsUpdateRecentSearch()
-
+            if (weakMovieCoordinator.movieListStatus == .available) {
+                //update recent searches
+                weakSelf.homeViewController.output.needsUpdateRecentSearch()
+                
+            } else if (weakMovieCoordinator.movieListStatus == .error) {
+                //show error.
+                weakSelf.homeViewController.showErrorAlert(withTitle: "Oops !!", message: "Something went wrong 🤷‍♂️ \n Try searching with another keyword.")
+            }
+            
             weakSelf.removeChild(weakMovieCoordinator)
         }
     }
