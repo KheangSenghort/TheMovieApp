@@ -38,7 +38,7 @@ class SearchCoordinator: Coordinator {
 
 extension SearchCoordinator: SearchCoordinatorInput {
     func presentMovieCoordinator(forSearchText searchText: String) {
-        let coordinator = MoviesCoordinator(router: router)//pass the string from here.
+        let coordinator = MoviesCoordinator(withSearchString: searchText, router: router)
         
         // Maintain a strong reference to avoid deallocation
         addChild(coordinator)

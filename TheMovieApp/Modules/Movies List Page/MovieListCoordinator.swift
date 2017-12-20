@@ -9,7 +9,13 @@
 import UIKit
 
 protocol MovieListCoordinatorInput: class {
-    
+    func setMoviesListAvailabilityStatus(status: MovieListStatus)
+}
+
+enum MovieListStatus {
+    case fetching //TODO: maybe rename awaitingResponse
+    case available
+    case notAvailable //TODO: maybe rename to error (Error) 
 }
 
 /**
@@ -22,7 +28,7 @@ class MoviesCoordinator: Coordinator   {
         let presenter = MoviesPresenter()
         presenter.view = controller
         presenter.coordinator = self
-        let interactor = MoviesInteractor(searchText: "Batman")//TODO: pass query string.
+        let interactor = MoviesInteractor(searchText: searchString)
         interactor.output = presenter
         presenter.interactor = interactor
         
@@ -30,6 +36,15 @@ class MoviesCoordinator: Coordinator   {
         
         return controller
     }()
+    
+    let searchString: String
+    var movieListStatus: MovieListStatus
+    
+    init(withSearchString searchString: String, router: RouterType) {
+        self.searchString = searchString
+        self.movieListStatus = .fetching
+        super.init(router: router)
+    }
     
     /// We must override toPresentable() so it doesn't
     /// default to the router's navigationController
@@ -39,5 +54,7 @@ class MoviesCoordinator: Coordinator   {
 }
 
 extension MoviesCoordinator : MovieListCoordinatorInput {
-    
+    func setMoviesListAvailabilityStatus(status: MovieListStatus) {
+        movieListStatus = status
+    }
 }
