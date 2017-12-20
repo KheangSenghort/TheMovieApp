@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import AlamofireImage
 
 public struct MovieListCellViewModel {
     let title: String
@@ -30,6 +31,7 @@ class MovieCell: UITableViewCell, ConfigurableCell {
 
     override func prepareForReuse() {
         titleLabel.text = ""
+        posterImage.image = UIImage(named: placeHolderImageName)
         releaseDateLabel.text = nil
         overviewLabel.text = nil
     }
@@ -42,6 +44,10 @@ class MovieCell: UITableViewCell, ConfigurableCell {
         self.titleLabel.text = movieCellViewModel.title
         self.releaseDateLabel.text = movieCellViewModel.releaseDate
         self.overviewLabel.text = movieCellViewModel.overview
-
+        
+        let placeholderImage = UIImage(named: placeHolderImageName)
+        if let imageURL = movieCellViewModel.posterUrl {
+            self.posterImage.af_setImage(withURL: imageURL, placeholderImage: placeholderImage)
+        }
     }
 }
