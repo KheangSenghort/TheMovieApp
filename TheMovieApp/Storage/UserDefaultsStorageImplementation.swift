@@ -39,8 +39,9 @@ class UserDefaultsStorageImplementation : Storage {
             }
             recentSearches.remove(at: currentIndex)
         }
-        //TODO: Keep only 10 items in 'recentSearches'
+
         recentSearches.insert(recentSearch, at: 0)
+        recentSearches = Array(recentSearches.prefix(10))//keep only first 10 items.
         
         let userDefaults = UserDefaults.standard
         userDefaults.set(recentSearches, forKey: recentSearchesKey)
