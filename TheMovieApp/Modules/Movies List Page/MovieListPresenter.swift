@@ -54,18 +54,7 @@ extension MoviesPresenter: MovieListViewOutput {
     }
 
     func cellViewModelForRow(atIndexPath indexPath: IndexPath) -> MovieListCellViewModel {
-        let movieData = interactor.currentMoviesList()[indexPath.row]
-        var posterUrl: URL? = nil
-        if let imageURL = movieData.poster_path {//TODO: shouldn't be here
-            let baseImageURL =  "https://image.tmdb.org/t/p/w92/"
-            posterUrl = URL(string: baseImageURL + imageURL)
-        }
-        
-        return MovieListCellViewModel(title: movieData.title,
-                                      releaseDate: movieData.release_date,
-                                      overview: movieData.overview,
-                                      posterUrl: posterUrl,
-                                      movieImage: nil)
+        return interactor.currentMoviesList()[indexPath.row]
     }
 
     func numberOfCells() -> Int {

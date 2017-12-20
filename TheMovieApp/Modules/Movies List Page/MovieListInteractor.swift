@@ -12,7 +12,7 @@ protocol MovieListInteractorInput {
     func fetchFirstPageList()
     func fetchNextPageIfAvailable()
     func isNextPageAvailable() -> Bool
-    func currentMoviesList() -> [MovieListDataModel.Movies]
+    func currentMoviesList() -> [MovieListCellViewModel]
 }
 
 /**
@@ -24,12 +24,12 @@ class MoviesInteractor : MovieListInteractorInput {
     
     weak var output: MovieListInteractorOutput?
     let movieListService: MovieListService
-    var movies = [MovieListDataModel.Movies]()
-    let searchText: String
-
-    var lastPageAvailable = 1
-    var lastPageRequested = 0
-    var totalPages = 1
+    private var movies = [MovieListCellViewModel]()
+    private let searchText: String
+    
+    private var lastPageAvailable = 1
+    private var lastPageRequested = 0
+    private var totalPages = 1
 
     init(searchText: String, movieListService: MovieListService = MovieListServiceBuilder().build()) {
         self.searchText = searchText
@@ -49,7 +49,19 @@ class MoviesInteractor : MovieListInteractorInput {
             case .success(listViewModel: let listDataModel):
                 self.lastPageAvailable = listDataModel.page
                 self.totalPages = listDataModel.total_pages
-                self.movies.append(contentsOf: listDataModel.results)
+                let baseImageURL =  "https://image.tmdb.org/t/p/w92/"
+
+                let moviesArray = listDataModel.results.map({ movieData -> MovieListCellViewModel in
+                    var posterUrl: URL? = nil
+                    if let imageURL = movieData.poster_path {
+                        posterUrl = URL(string: baseImageURL + imageURL)
+                    }
+                    return MovieListCellViewModel(title: movieData.title,
+                                                  releaseDate: movieData.release_date,
+                                                  overview: movieData.overview,
+                                                  posterUrl: posterUrl)
+                })
+                self.movies.append(contentsOf: moviesArray)
                 self.output?.updateMovieListWithResults()
             default:
                 self.output?.showError()
@@ -67,7 +79,7 @@ class MoviesInteractor : MovieListInteractorInput {
         }
     }
     
-    func currentMoviesList() -> [MovieListDataModel.Movies] {
+    func currentMoviesList() -> [MovieListCellViewModel] {
         return movies
     }
     

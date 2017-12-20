@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class Router: NSObject, RouterType, UINavigationControllerDelegate {
+class Router: NSObject, RouterType, UINavigationControllerDelegate {
     
     private var completions: [UIViewController : () -> Void]
     

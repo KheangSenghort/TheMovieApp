@@ -13,5 +13,4 @@ public struct MovieListCellViewModel {
     let releaseDate: String?
     let overview: String?
     let posterUrl: URL?
-    var movieImage: UIImage? = nil
 }

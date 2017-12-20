@@ -14,22 +14,26 @@ import Foundation
 
 class UserDefaultsStorageImplementation : Storage {
     private let recentSearchesKey = "recentSearchesKey"
-
+    private let userDefaults: UserDefaults
+    
+    init(userDefaults: UserDefaults = UserDefaults.standard) {
+        self.userDefaults = userDefaults
+    }
+    
     func resetStorage() {
-        let userDefaults = UserDefaults.standard
         userDefaults.set(nil, forKey: recentSearchesKey)
         userDefaults.synchronize()
     }
     
     func fetchRecentSearches() -> [String] {
-        return UserDefaults.standard.value(forKey: recentSearchesKey) as? [String] ?? [String]()
+        return userDefaults.value(forKey: recentSearchesKey) as? [String] ?? [String]()
     }
     
     func addSuccessfulRecentSearch(recentSearch: String, completion: (Bool) -> Void) {
         var recentSearches: [String] = fetchRecentSearches()
         
         let index: Int? = recentSearches.index { (searchItem: String) -> Bool in
-            return searchItem.lowercased() == recentSearch.lowercased()
+            return searchItem.lowercased() == recentSearch.lowercased()//TODO: truncate leading-trailing white spaces.
         }
         
         if let currentIndex = index {
@@ -43,7 +47,6 @@ class UserDefaultsStorageImplementation : Storage {
         recentSearches.insert(recentSearch, at: 0)
         recentSearches = Array(recentSearches.prefix(10))//keep only first 10 items.
         
-        let userDefaults = UserDefaults.standard
         userDefaults.set(recentSearches, forKey: recentSearchesKey)
         userDefaults.synchronize()
         

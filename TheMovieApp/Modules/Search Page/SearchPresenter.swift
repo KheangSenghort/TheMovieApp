@@ -25,7 +25,6 @@ protocol SearchViewOutput {
 
 protocol SearchInteractorOutput: class {
     func updateWithRecentSearches(recentSearches: [String])
-    func recentSearchNotAvailable()
 }
 
 /**
@@ -102,10 +101,6 @@ extension SearchPresenter: SearchInteractorOutput {
     func updateWithRecentSearches(recentSearches: [String]) {
         self.recentSearches = recentSearches.map {RecentSearchCellDataModel(searchText: $0)}
         view?.refreshRecentSearchData()
-    }
-    
-    func recentSearchNotAvailable() {
-        view?.hideRecentSearchTable()
     }
 }
 
