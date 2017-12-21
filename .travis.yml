@@ -1,0 +1,9 @@
+osx_image: xcode9.2
+language: objective-c
+
+script:
+    - xcodebuild clean build test -workspace TheMovieApp.xcworkspace -scheme TheMovieApp -configuration Debug -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 8' CODE_SIGNING_REQUIRED=NO
+# whitelist
+branches:
+only:
+- master
