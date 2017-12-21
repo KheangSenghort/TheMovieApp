@@ -2,22 +2,19 @@
 //  MovieListPresenter.swift
 //  TheMovieApp
 //
-//  Created by Parmar, Mehul (Agoda) on 19/12/17.
+//  Created by Parmar, Mehul on 19/12/17.
 //  Copyright © 2017 Mehul Parmar. All rights reserved.
 //
 
 import Foundation
 
 protocol MovieListViewOutput {
-    func viewIsReady()
     func viewWillAppear()
-    func viewDidAppear()
     func viewWillDisappear()
 
     func numberOfCells() -> Int
     func cellViewModelForRow(atIndexPath indexPath: IndexPath) -> MovieListCellViewModel
     func fetchNextCellsIfAvailable()
-
 }
 
 protocol MovieListInteractorOutput: class {
@@ -37,16 +34,9 @@ class MoviesPresenter {
 }
 
 extension MoviesPresenter: MovieListViewOutput {
-    func viewIsReady() {
-        
-    }
-    
+
     func viewWillAppear() {
         interactor.fetchFirstPageList()
-    }
-    
-    func viewDidAppear() {
-        
     }
     
     func viewWillDisappear() {

@@ -2,7 +2,7 @@
 //  Presentable.swift
 //  TheMovieApp
 //
-//  Created by Parmar, Mehul (Agoda) on 19/12/17.
+//  Created by Parmar, Mehul on 19/12/17.
 //  Copyright © 2017 Mehul Parmar. All rights reserved.
 //
 

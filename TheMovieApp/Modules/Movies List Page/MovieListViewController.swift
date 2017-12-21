@@ -2,7 +2,7 @@
 //  MovieListViewController.swift
 //  TheMovieApp
 //
-//  Created by Parmar, Mehul (Agoda) on 19/12/17.
+//  Created by Parmar, Mehul on 19/12/17.
 //  Copyright © 2017 Mehul Parmar. All rights reserved.
 //
 
@@ -16,8 +16,8 @@ protocol MovieListViewInput: class {
 
 class MovieListViewController: UIViewController {
     private let cellReuseIdentifier = "MovieCellView"
-    let tableView = UITableView()
-    let activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.whiteLarge)
+    private let tableView = UITableView()
+    private let activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.whiteLarge)
     
     var output: MovieListViewOutput!
     
@@ -38,7 +38,6 @@ class MovieListViewController: UIViewController {
         
         setupConstraints()
         view.backgroundColor = .lightGray
-        output.viewIsReady()
     }
     
     private func setupConstraints () {

@@ -2,7 +2,7 @@
 //  MovieListInteractor.swift
 //  TheMovieApp
 //
-//  Created by Parmar, Mehul (Agoda) on 19/12/17.
+//  Created by Parmar, Mehul on 19/12/17.
 //  Copyright © 2017 Mehul Parmar. All rights reserved.
 //
 
@@ -43,12 +43,14 @@ class MoviesInteractor : MovieListInteractorInput {
     
     private func fetchMoviesForRequest(request: MovieListRequest) {
         lastPageRequested = request.pageNumber
-        movieListService.getMoviesForQueryText(request: request) { (response: MovieListResponse) in
-            
+        movieListService.getMoviesForQueryText(request: request) { [weak self] (response: MovieListResponse) in
+            guard let weakSelf = self else {
+                return
+            }
             switch response.status {
             case .success(listViewModel: let listDataModel):
-                self.lastPageAvailable = listDataModel.page
-                self.totalPages = listDataModel.total_pages
+                weakSelf.lastPageAvailable = listDataModel.page
+                weakSelf.totalPages = listDataModel.total_pages
                 let baseImageURL =  "https://image.tmdb.org/t/p/w92/"
 
                 let moviesArray = listDataModel.results.map({ movieData -> MovieListCellViewModel in
@@ -61,10 +63,10 @@ class MoviesInteractor : MovieListInteractorInput {
                                                   overview: movieData.overview,
                                                   posterUrl: posterUrl)
                 })
-                self.movies.append(contentsOf: moviesArray)
-                self.output?.updateMovieListWithResults()
+                weakSelf.movies.append(contentsOf: moviesArray)
+                weakSelf.output?.updateMovieListWithResults()
             default:
-                self.output?.showError()
+                weakSelf.output?.showError()
             }
         }
     }
