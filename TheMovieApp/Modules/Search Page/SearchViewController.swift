@@ -14,6 +14,7 @@ protocol SearchViewInput: class {
     func refreshRecentSearchData()
     func showErrorAlert(withTitle title: String, message: String)
     func updateTextFieldWithRecentSearch(searchString: String)
+    func keyboardPresented(withHeight: CGFloat)
 }
 
 /**
@@ -28,6 +29,9 @@ class SearchViewController: UIViewController {
     
     var output: SearchViewOutput!
     
+    private weak var tableViewBottomConstraint: NSLayoutConstraint?
+    private let padding: CGFloat = 8
+
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .lightGray
@@ -43,6 +47,7 @@ class SearchViewController: UIViewController {
         textField.backgroundColor = .white
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.borderStyle = .roundedRect
+        textField.clearButtonMode = .whileEditing
         
         recentSearchTable.delegate = self
         recentSearchTable.dataSource = self
@@ -67,7 +72,6 @@ class SearchViewController: UIViewController {
     }
     
     private func setupConstraints () {
-        let padding: CGFloat = 8 // left/right padding
         let verticalSpacing: CGFloat = 20
         
         searchButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: verticalSpacing).isActive = true
@@ -82,7 +86,8 @@ class SearchViewController: UIViewController {
         recentSearchTable.topAnchor.constraint(equalTo: textField.bottomAnchor, constant: verticalSpacing).isActive = true
         recentSearchTable.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor, constant: padding).isActive = true
         recentSearchTable.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor, constant: -padding).isActive = true
-        recentSearchTable.bottomAnchor.constraint(greaterThanOrEqualTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -40).isActive = true
+        tableViewBottomConstraint = recentSearchTable.bottomAnchor.constraint(greaterThanOrEqualTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -40)
+        tableViewBottomConstraint?.isActive = true
     }
     
     @objc func didTapSearchButton(_ sender: UIButton) {
@@ -126,6 +131,11 @@ extension SearchViewController: UITextFieldDelegate {
 }
 
 extension SearchViewController : SearchViewInput {
+    func keyboardPresented(withHeight height: CGFloat) {
+        tableViewBottomConstraint?.constant = -(height + padding)
+        view.setNeedsLayout()
+    }
+    
     func showErrorAlert(withTitle title: String, message: String) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         let alertButton = UIAlertAction(title: "Okay 😕", style: .cancel, handler: nil)

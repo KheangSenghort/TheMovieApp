@@ -7,6 +7,7 @@
 //
 
 import XCTest
+import Foundation
 @testable import TheMovieApp
 
 final class SearchPresenterTests: XCTestCase {
@@ -73,5 +74,10 @@ final class SearchPresenterTests: XCTestCase {
     func testMovieListPageNOTPresentedForEmptyString(){
         presenter.userTappedOnSearchButton(withSearchText: "")
         XCTAssertFalse(coordinator.isPresentMovieCoordinatorCalled)
+    }
+    
+    func testKeyboardWillShowNotificationUpdatesView() {
+        NotificationCenter.default.post(name: Notification.Name.UIKeyboardWillShow, object: nil)
+        XCTAssertTrue(view.isKeyboardPresentedCalled)
     }
 }

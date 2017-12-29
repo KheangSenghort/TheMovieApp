@@ -114,6 +114,11 @@ final class MockSearchCoordinatorInput: SearchCoordinatorInput {
 
 final class MockSearchViewInput: SearchViewInput {
     
+    var isKeyboardPresentedCalled = false
+    func keyboardPresented(withHeight: CGFloat) {
+        isKeyboardPresentedCalled = true
+    }
+    
     var isShowRecentSearchTableCalled = false
     func showRecentSearchTable() {
         isShowRecentSearchTableCalled = true

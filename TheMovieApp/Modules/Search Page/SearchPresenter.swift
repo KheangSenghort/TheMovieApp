@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 protocol SearchViewOutput {
     func viewIsReady()
@@ -40,6 +41,25 @@ class SearchPresenter {
     var searchText = ""
     
     private var recentSearches = [RecentSearchCellDataModel]()
+    
+    init() {
+        registerObservers()
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
+    //can be moved to a seperate 'EventHandler' class.
+    private func registerObservers() {
+        let center = NotificationCenter.default
+        center.addObserver(forName: Notification.Name.UIKeyboardWillShow, object: nil, queue: nil) { [weak self] notification in
+            
+            let userInfo = notification.userInfo
+            let keyboardFrame = userInfo?[UIKeyboardFrameEndUserInfoKey] as? CGRect
+            self?.view?.keyboardPresented(withHeight: keyboardFrame?.height ?? CGFloat(0.0))
+        }
+    }
 }
 
 extension SearchPresenter: SearchViewOutput {
