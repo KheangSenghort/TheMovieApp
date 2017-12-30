@@ -1,0 +1,30 @@
+excluded:
+  - Pods
+
+line_length: 140
+
+cyclomatic_complexity:
+  warning: 10
+  error: 20
+  ignores_case_statements: true
+
+large_tuple:
+  warning: 2
+  error: 3
+
+disabled_rules:
+    - control_statement
+    - discarded_notification_center_observer
+    - identifier_name
+    - force_cast
+    - nesting
+
+opt_in_rules:
+  - closure_end_indentation
+  - closure_spacing
+  - first_where
+  - multiline_parameters
+  - operator_usage_whitespace
+  - overridden_super_call
+  - trailing_closure
+  - vertical_parameter_alignment_on_call
