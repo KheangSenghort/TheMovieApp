@@ -15,9 +15,9 @@ import Foundation
 protocol ConfigType {
     var apiVersion: String { get }
     var apiEndpoint: String { get }
-    var baseURLString: String  { get }
+    var baseURLString: String { get }
     var APIKey: String { get }
-    
+
     var environment: Environment { get }
     var buildNumber: String { get }
     var locale: Locale { get }

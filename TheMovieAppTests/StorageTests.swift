@@ -19,20 +19,20 @@ final class StorageTests: XCTestCase {
         mockUserDefaults = MockUserDefaults()
         storage = UserDefaultsStorageImplementation(userDefaults: mockUserDefaults)
     }
-    
+
     func testResetStorage() {
         storage.resetStorage()
         XCTAssertTrue(mockUserDefaults.isSetValueForKeyCalled)
         XCTAssertNil(mockUserDefaults.newValue)
     }
-    
+
     func testFetchRecentSearches() {
         mockUserDefaults.returnValue = ["ABC", "XYZ"]
         let recentSearches = storage.fetchRecentSearches()
         XCTAssertTrue(mockUserDefaults.isValueForKeyCalled)
         XCTAssertEqual(recentSearches, ["ABC", "XYZ"])
     }
-    
+
     func testAddSuccessfulRecentSearchForStringSameAsLastSearch() {
         mockUserDefaults.returnValue = ["ABC", "XYZ"]
         storage.addSuccessfulRecentSearch(recentSearch: "ABC") { needsUpdate in
@@ -40,7 +40,7 @@ final class StorageTests: XCTestCase {
         }
         XCTAssertFalse(mockUserDefaults.isSetValueForKeyCalled)
     }
-    
+
     func testAddSuccessfulRecentSearchForNewString() {
         mockUserDefaults.returnValue = ["ABC", "XYZ"]
         storage.addSuccessfulRecentSearch(recentSearch: "PQR") { needsUpdate in
@@ -50,7 +50,7 @@ final class StorageTests: XCTestCase {
         XCTAssertNotNil(mockUserDefaults.newValue as? [String])
         XCTAssertEqual(mockUserDefaults.newValue as! [String], ["PQR", "ABC", "XYZ"])
     }
-    
+
     func testAddSuccessfulRecentSearchForExistingString() {
         mockUserDefaults.returnValue = ["ABC", "PQR", "XYZ"]
         storage.addSuccessfulRecentSearch(recentSearch: "PQR") { needsUpdate in

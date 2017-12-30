@@ -19,7 +19,7 @@ protocol SearchInteractorInput {
  the list of most recent successful searches.
  */
 class SearchInteractor: SearchInteractorInput {
-    
+
     weak var output: SearchInteractorOutput?
     private let storageManager: Storage
 
@@ -34,7 +34,7 @@ class SearchInteractor: SearchInteractorInput {
             }
         }
     }
-    
+
     func fetchRecentSearches() {
         output?.updateWithRecentSearches(recentSearches: storageManager.fetchRecentSearches())
     }

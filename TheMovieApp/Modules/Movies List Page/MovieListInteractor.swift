@@ -20,13 +20,13 @@ protocol MovieListInteractorInput {
  Here, the MoviesInteractor communicates with the API to fetch the movies for the given search query.
  This class also handles the pagination logic.
  */
-class MoviesInteractor : MovieListInteractorInput {
-    
+class MoviesInteractor: MovieListInteractorInput {
+
     weak var output: MovieListInteractorOutput?
     let movieListService: MovieListService
     private var movies = [MovieListCellViewModel]()
     private let searchText: String
-    
+
     private var lastPageAvailable = 1
     private var lastPageRequested = 0
     private var totalPages = 1
@@ -40,7 +40,7 @@ class MoviesInteractor : MovieListInteractorInput {
         let request = MovieListRequest(queryText: searchText, pageNumber: 1)
         fetchMoviesForRequest(request: request)
     }
-    
+
     private func fetchMoviesForRequest(request: MovieListRequest) {
         lastPageRequested = request.pageNumber
         movieListService.getMoviesForQueryText(request: request) { [weak self] (response: MovieListResponse) in
@@ -55,11 +55,11 @@ class MoviesInteractor : MovieListInteractorInput {
 
                 let moviesArray = listDataModel.results.map({ movieData -> MovieListCellViewModel in
                     var posterUrl: URL? = nil
-                    if let imageURL = movieData.poster_path {
+                    if let imageURL = movieData.posterPath {
                         posterUrl = URL(string: baseImageURL + imageURL)
                     }
                     return MovieListCellViewModel(title: movieData.title,
-                                                  releaseDate: movieData.release_date,
+                                                  releaseDate: movieData.releaseDate,
                                                   overview: movieData.overview,
                                                   posterUrl: posterUrl)
                 })
@@ -70,7 +70,7 @@ class MoviesInteractor : MovieListInteractorInput {
             }
         }
     }
-    
+
     func fetchNextPageIfAvailable() {
         let pageToFetch = lastPageAvailable + 1
         if isNextPageAvailable() && pageToFetch != lastPageRequested {
@@ -80,11 +80,11 @@ class MoviesInteractor : MovieListInteractorInput {
             self.output?.finishedLoadingAllMovies()
         }
     }
-    
+
     func currentMoviesList() -> [MovieListCellViewModel] {
         return movies
     }
-    
+
     func isNextPageAvailable() -> Bool {
         return lastPageAvailable < totalPages
     }

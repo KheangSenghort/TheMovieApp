@@ -17,29 +17,29 @@ protocol MovieListViewInput: class {
 class MovieListViewController: UIViewController {
     private let cellReuseIdentifier = "MovieCellView"
     private let tableView = UITableView()
-    private let activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.whiteLarge)
-    
+    private let activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: .whiteLarge)
+
     var output: MovieListViewOutput!
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Movies"
         view.addSubview(tableView)
-        
+
         let movieCellNib = UINib(nibName: "MovieCell", bundle: nil)//move to some nibLoadable protocol.
         tableView.register(movieCellNib, forCellReuseIdentifier: cellReuseIdentifier)
-        
+
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 180
-        
+
         tableView.dataSource = self
         tableView.delegate = self
         tableView.allowsSelection = false
-        
+
         setupConstraints()
         view.backgroundColor = .lightGray
     }
-    
+
     private func setupConstraints () {
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 0).isActive = true
@@ -47,56 +47,57 @@ class MovieListViewController: UIViewController {
         tableView.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor, constant: 0).isActive = true
         tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: 0).isActive = true
     }
-    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
+
         let activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: .gray)
         tableView.backgroundView = activityIndicator
         activityIndicator.startAnimating()
         tableView.tableFooterView = UIView()
         output.viewWillAppear()
     }
-    
+
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         output.viewWillDisappear()
     }
 }
 
-extension MovieListViewController : MovieListViewInput {
+extension MovieListViewController: MovieListViewInput {
     func reloadTable() {
         tableView.reloadData()
-        
+
         let spinner = UIActivityIndicatorView(activityIndicatorStyle: .gray)
         spinner.startAnimating()
         spinner.frame = CGRect(x: CGFloat(0), y: CGFloat(0), width: tableView.bounds.width, height: CGFloat(44))
-        
+
         tableView.tableFooterView = spinner
         tableView.tableFooterView?.isHidden = false
     }
-    
+
     func removeFetchingMoreSpinner() {
         tableView.backgroundView = nil
         tableView.tableFooterView = UIView()
     }
-    
+
     func dismiss() {
         self.navigationController?.popViewController(animated: true)
     }
 }
 
-extension MovieListViewController : UITableViewDelegate, UITableViewDataSource {
+extension MovieListViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return output.numberOfCells()
     }
-    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: cellReuseIdentifier, for: indexPath) as? MovieCell
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: cellReuseIdentifier,
+                                                       for: indexPath) as? MovieCell
             else {
                 return UITableViewCell()
         }
-        
+
         defer {
             if indexPath.row == output.numberOfCells() - 1 {
                 output.fetchNextCellsIfAvailable()

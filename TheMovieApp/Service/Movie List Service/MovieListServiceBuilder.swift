@@ -15,12 +15,12 @@ import Foundation
 struct MovieListServiceBuilder {
 
     let configuration: ConfigType // the base URl, env., etc.
-    
+
     init(config: ConfigType = Config(bundle: Bundle.main, locale: Locale.current)) {
         configuration = config
     }
-    
-    func build() -> MovieListService {        
+
+    func build() -> MovieListService {
         let baseURLString = configuration.baseURLString
         let APIKey = configuration.APIKey
         return MovieListServiceImplementation(baseURLString: baseURLString, APIKey: APIKey)

@@ -28,9 +28,9 @@ class MoviesPresenter {
     var interactor: MovieListInteractorInput!
     var coordinator: MovieListCoordinatorInput!
     var moviesListStatus: MovieListStatus = .awaitingResponse
-    
+
     private var recentSearches = [MovieListCellViewModel]()
-    
+
 }
 
 extension MoviesPresenter: MovieListViewOutput {
@@ -38,7 +38,7 @@ extension MoviesPresenter: MovieListViewOutput {
     func viewWillAppear() {
         interactor.fetchFirstPageList()
     }
-    
+
     func viewWillDisappear() {
         coordinator.setMoviesListAvailabilityStatus(status: moviesListStatus)
     }
@@ -51,23 +51,23 @@ extension MoviesPresenter: MovieListViewOutput {
         let currentCount = interactor.currentMoviesList().count
         return currentCount
     }
-    
+
     func fetchNextCellsIfAvailable() {
         interactor.fetchNextPageIfAvailable()
     }
 }
 
 extension MoviesPresenter: MovieListInteractorOutput {
-    
+
     func finishedLoadingAllMovies() {
         view?.removeFetchingMoreSpinner()
     }
-    
+
     func showError() {
         moviesListStatus = .error
         view?.dismiss()
     }
-    
+
     func updateMovieListWithResults() {
         if(numberOfCells() > 0) {
             moviesListStatus = .available

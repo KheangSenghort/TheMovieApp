@@ -21,13 +21,13 @@ final class SearchInteractorTests: XCTestCase {
         interactor = SearchInteractor(storageManager: storage)
         interactor.output = output
     }
-    
+
     func testInsertRecentSearchAddsSearchStringAndUpdatesPresenter() {
         interactor.insertRecentSearch(searchString: "ABC")
         XCTAssertTrue(storage.isAddSuccessfulRecentSearchCalled)
         XCTAssertTrue(output.isUpdateWithRecentSearchesCalled)
     }
-    
+
     func testFetchRecentSearchFetchesFromTheStoreAndUpdatesPresenter() {
         interactor.fetchRecentSearches()
         XCTAssertTrue(storage.isFetchRecentSearchesCalled)

@@ -15,16 +15,25 @@ struct MovieListDataModel: Codable {
     let page: Int
     let total_results: Int
     let total_pages: Int
-    
+
     struct Movies: Codable {
         let id: Int
         let title: String
-        let poster_path: String?
+        let posterPath: String?
         let overview: String?
-        let release_date : String? //"YYYY-MM-DD"
+        let releaseDate: String? //"YYYY-MM-DD"
         var completePosterURLString: String?
+
+        enum CodingKeys: String, CodingKey {
+            case id
+            case title
+            case posterPath = "poster_path"
+            case overview
+            case releaseDate = "release_date"
+            case completePosterURLString
+        }
     }
-    
+
     let results: [Movies]
 }
 
@@ -34,6 +43,6 @@ struct MovieListResponse {
         case validationIssue(message: String)
         case failure(error: Error)
     }
-    
+
     let status: Status
 }
